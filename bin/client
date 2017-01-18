@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+# encoding: UTF-8
+require_relative '../lib/credit_card'
+require_relative '../lib/credit_client'
+
+def parse(line,accounts)
+  tokens = line.split(' ')
+  case tokens[0]
+    when "Add"
+      CreditClient.add(tokens, accounts)
+    when "Credit"
+      CreditClient.credit(tokens, accounts)
+    when "Charge"
+      CreditClient.charge(tokens, accounts)
+  end
+end
+
+def summary(accounts)
+  accounts.each do |name, account|
+    if account.valid?
+      p "#{name}: $#{account.balance}"
+    else
+      p "#{name}: error"
+    end
+  end
+end
+
+def read_from_stdin(accounts)
+  STDIN.each_line do |line|
+    parse(line,accounts)
+  end
+end
+
+def read_from_file(filename,accounts)
+  open(filename).each_line do |line|
+    parse(line,accounts)
+  end
+end
+
+def process(accounts = {})
+  if ARGV.first
+    read_from_file(ARGV.first,accounts)
+  else
+    read_from_stdin(accounts)
+  end
+  summary(accounts)
+end
+######################################
+
+process

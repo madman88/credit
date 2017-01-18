@@ -1,0 +1,16 @@
+Design designs
+
+1. Chose ruby as I am familiar with it.
+2. The credit card class a pretty straightforward.
+3. The validation for the card number could have been done in many ways
+   -> There is already a gem.
+   -> I chose to implement a function which would do this as it is pretty straightforward.
+4. The main script `client` is the one which reads the args and switches based
+   on the operation to be done.
+5. I thought of using OptParse but that seemed like a bit of an overkill as
+   there are only 2 options. But if I were to evolve this I would definitely
+   use `Thor` or Optparse
+6. Credit client is a simple wrapper which I tested by checking whether the Creditcard
+   object received the relevant messages.
+
+Usage: bin/client bin/input.txt or  bin/client < bin/input.txt     
